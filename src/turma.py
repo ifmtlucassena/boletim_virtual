@@ -1,7 +1,5 @@
-
 from .exceptions import TurmaLotadaError
 from .media import Media
-
 
 class Turma:
     def __init__(self, limite: int = 40):
@@ -16,10 +14,16 @@ class Turma:
         self.alunos.append(aluno)
 
     def remover_aluno_por_nome(self, nome: str) -> None:
-        self.alunos = [aluno for aluno in self.alunos if aluno.nome != nome]
+        alunos_restantes = []
+
+        for aluno in self.alunos:
+            if aluno.nome != nome:
+                alunos_restantes.append(aluno)
+
+        self.alunos = alunos_restantes
 
     def calcular_media_turma(self) -> float:
-        if not self.alunos:
+        if len(self.alunos) == 0:
             return 0.0
 
         medias = []
