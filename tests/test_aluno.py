@@ -1,25 +1,34 @@
+import pytest
 from src.aluno import Aluno
 from src.exceptions import NotaInvalidaError
 
-
 class TestAluno:
-    def setup_method(self):
+    def setup_method(self, method):
         self.aluno = Aluno("João Silva")
 
     def test_adicionar_nota_valida(self):
-        pass
+        self.aluno.adicionar_nota(8.5)
+        assert 8.5 in self.aluno.get_notas()
 
     def test_adicionar_nota_negativa_lanca_excecao(self):
-        pass
+        with pytest.raises(NotaInvalidaError):
+            self.aluno.adicionar_nota(-1.0)
 
     def test_adicionar_nota_acima_de_dez_lanca_excecao(self):
-        pass
+        with pytest.raises(NotaInvalidaError):
+            self.aluno.adicionar_nota(10.1)
 
     def test_get_notas_retorna_lista(self):
-        pass
+        self.aluno.adicionar_nota(5.0)
+        self.aluno.adicionar_nota(7.0)
+        assert self.aluno.get_notas() == [5.0, 7.0]
 
     def test_limpar_notas_esvazia_lista(self):
-        pass
+        self.aluno.adicionar_nota(10.0)
+        self.aluno.limpar_notas()
+        assert len(self.aluno.get_notas()) == 0
 
     def test_get_quantidade_notas_retorna_total_correto(self):
-        pass
+        self.aluno.adicionar_nota(10.0)
+        self.aluno.adicionar_nota(9.0)
+        assert self.aluno.get_quantidade_notas() == 2
