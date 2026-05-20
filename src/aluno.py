@@ -1,14 +1,15 @@
 from .exceptions import NotaInvalidaError
 
+
 class Aluno:
     def __init__(self, nome: str):
         self.nome = nome
         self.notas = []
 
     def adicionar_nota(self, nota: float) -> None:
-        if not isinstance(nota, (int, float)) or nota < 0 or nota > 10:
+        if nota < 0.0 or nota > 10.0:
             raise NotaInvalidaError
-        self.notas.append(float(nota))
+        self.notas.append(nota)
 
     def get_notas(self) -> list:
         return self.notas
