@@ -1,12 +1,22 @@
+from .exceptions import StatusInconclusivoError
+
+
 class ClassificadorDesempenho:
     def definir_situacao(self, media: float) -> str:
-        pass
+        if media is None:
+            raise StatusInconclusivoError
+        if media >= 7.0:
+            return "APROVADO"
+        if media >= 4.0:
+            return "RECUPERACAO"
+        return "REPROVADO"
 
     def pode_realizar_exame(self, media: float) -> bool:
-        pass
+        return media >= 4.0 and media < 7.0
 
     def formatar_resumo(self, nome: str, media: float) -> str:
-        pass
+        situacao = self.definir_situacao(media)
+        return f"Aluno: {nome} | Média: {media} | Situação: {situacao}"
 
     def atingiu_criterio_aprovacao(self, media: float) -> bool:
-        pass
+        return media >= 7.0
