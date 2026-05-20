@@ -25,8 +25,8 @@ class TestClassificadorDesempenho:
 
     def test_formatar_resumo_retorna_string_com_nome_media_e_situacao(self):
         resumo = self.classificador.formatar_resumo("João Silva", 8.0)
-        assert "João Silva" in str(resumo)
-        assert "APROVADO" in str(resumo)
+        assert "João Silva" in resumo
+        assert "APROVADO" in resumo
 
     def test_atingiu_criterio_aprovacao_quando_media_suficiente(self):
         assert self.classificador.atingiu_criterio_aprovacao(7.0) is True
